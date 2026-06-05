@@ -21,4 +21,19 @@ public class Controller {
             return "Incorrect Password";
         }
     }
+
+    public String userRegistration(String user, String password) {
+
+
+        User existingUser = persisControl.searchByName(user);
+        if (existingUser != null) {
+            return "Error: The username " + user + " is already taken.";
+        }
+        User usu = new User();
+        usu.setUserName(user);
+        usu.setPassword(password);
+        persisControl.createUser(usu);
+
+        return "User registered successfully!";
+    }
 }

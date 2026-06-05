@@ -13,8 +13,10 @@ public class Principal extends JFrame{
     private JButton btnLogin;
     private JButton btnClear;
     private JTextArea txtMessage;
+    private JButton signUpButton;
 
     Controller control;
+    Registration regis;
 
 
 
@@ -44,6 +46,17 @@ public class Principal extends JFrame{
                 String password = new String(txtPassword.getPassword());
                 String message = control.userValidation(user,password);
                 txtMessage.setText(message);
+            }
+        });
+        signUpButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (regis == null) {
+                    regis = new Registration();
+                }
+
+                regis.setVisible(true);
             }
         });
     }
