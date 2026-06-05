@@ -46,6 +46,8 @@ public class Principal extends JFrame{
                 String password = new String(txtPassword.getPassword());
                 String message = control.userValidation(user,password);
                 txtMessage.setText(message);
+                txtUser.setText("");
+                txtPassword.setText("");
             }
         });
         signUpButton.addActionListener(new ActionListener() {
