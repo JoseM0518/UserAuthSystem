@@ -1,12 +1,13 @@
 package com.login.igu;
 
 import com.login.logic.Controller;
+import com.login.logic.User;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Principal extends JFrame{
+public class InitialLogin extends JFrame{
     private JPanel panel1;
     private JTextField txtUser;
     private JPasswordField txtPassword;
@@ -20,7 +21,7 @@ public class Principal extends JFrame{
 
 
 
-    public Principal() {
+    public InitialLogin() {
         setTitle("Control panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel1);
@@ -44,8 +45,28 @@ public class Principal extends JFrame{
 
                 String user = txtUser.getText();
                 String password = new String(txtPassword.getPassword());
-                String message = control.userValidation(user,password);
-                txtMessage.setText(message);
+                User usu = control.userValidation(user,password);
+                if(usu != null ){
+
+                    String rol = usu.getRol().getRolName();
+                    if (rol.equals("admin")){
+
+                        PrimaryAdmin prAdmin = new PrimaryAdmin(control, usu);
+                        prAdmin.setVisible(true);
+                        prAdmin.setLocationRelativeTo(null);
+                    }
+                    else {
+
+                        PrimaryUser prUser = new PrimaryUser(control, usu);
+                        prUser.setVisible(true);
+                        prUser.setLocationRelativeTo(null);
+                    }
+                }
+                else{
+
+                    txtMessage.setText("Incorrect User or Password ");
+                }
+
                 txtUser.setText("");
                 txtPassword.setText("");
             }
@@ -55,7 +76,7 @@ public class Principal extends JFrame{
             public void actionPerformed(ActionEvent e) {
 
                 if (regis == null) {
-                    regis = new Registration();
+                    regis = new Registration(control);
                 }
 
                 regis.setVisible(true);

@@ -18,14 +18,13 @@ public class Registration extends JFrame {
 
 
 
-    public Registration() {
+    public Registration(Controller control) {
         setTitle("Sign up panel");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(panel1);
         pack();
         setLocationRelativeTo(null);
-
-        control = new Controller();
+        this.control = control;
 
         btnSave.addActionListener(new ActionListener() {
             @Override

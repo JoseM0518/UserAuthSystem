@@ -7,19 +7,16 @@ public class Controller {
 
     PersistenceController persisControl = new PersistenceController();
 
-    public String userValidation(String user, String password) {
+    public User userValidation(String user, String password) {
+
 
         User usu = persisControl.searchByName(user);
 
-        if (usu == null) {
-            return "User not found";
+        if (usu != null && usu.getPassword().equals(password)) {
+            return usu;
         }
+        return null;
 
-        if (usu.getPassword().equals(password)) {
-            return "Correct User and Password, Welcome " + usu.getUserName();
-        } else {
-            return "Incorrect Password";
-        }
     }
 
     public String userRegistration(String user, String password) {
@@ -29,11 +26,17 @@ public class Controller {
         if (existingUser != null) {
             return "Error: The username " + user + " is already taken.";
         }
+
+        Rol rolDefault = persisControl.searchRol(2L);
         User usu = new User();
         usu.setUserName(user);
         usu.setPassword(password);
+        usu.setRol(rolDefault);
         persisControl.createUser(usu);
 
         return "User registered successfully!";
     }
+
+
+
 }

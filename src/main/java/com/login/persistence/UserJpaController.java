@@ -83,6 +83,16 @@ public class UserJpaController implements Serializable {
             return em.find(User.class, id);
         }
     }
+// Search by name
+    public User findByUsername(String username) {
+        try (EntityManager em = getEntityManager()) {
+            return em.createQuery("SELECT u FROM User u WHERE u.userName = :username", User.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     // Internal validation
     private void validateUser(User user) {

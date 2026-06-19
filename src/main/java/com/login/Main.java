@@ -1,11 +1,13 @@
 package com.login;
 
-import com.login.igu.Principal;
+import com.login.igu.InitialLogin;
+import com.login.igu.PrimaryAdmin;
 
 public class Main {
     public static void main(String[] args) {
 
-        Principal principal = new Principal();
-        principal.setVisible(true);
+        InitialLogin initialLogin = new InitialLogin();
+        initialLogin.setVisible(true);
+
     }
 }

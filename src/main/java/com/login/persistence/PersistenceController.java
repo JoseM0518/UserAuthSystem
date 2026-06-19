@@ -1,5 +1,6 @@
 package com.login.persistence;
 
+import com.login.logic.Rol;
 import com.login.logic.User;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -9,10 +10,14 @@ public class PersistenceController {
 
     private static final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("LoginPU");
     private final UserJpaController userJpa;
+    private final RolJpaController rolJpa;
+
 
     public PersistenceController() {
         this.userJpa = new UserJpaController(EMF);
+        this.rolJpa = new RolJpaController(EMF);
     }
+
 
 
     public void createUser(User user) {
@@ -49,15 +54,20 @@ public class PersistenceController {
 
 
     public User searchByName(String nombreUsuario) {
-        List<User> todos = getUsers();
-        if (todos != null) {
-            for (User u : todos) {
-                if (u.getUserName().equalsIgnoreCase(nombreUsuario.trim())) {
-                    return u;
-                }
-            }
-        }
-        return null;
+
+        return userJpa.findByUsername(nombreUsuario);
+    }
+
+    public void createRol(Rol rol) {
+        rolJpa.create(rol);
+    }
+
+    public List<Rol> getRoles() {
+        return rolJpa.findAll();
+    }
+
+    public Rol searchRol(Long id) {
+        return rolJpa.findById(id);
     }
 
 
