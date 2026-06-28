@@ -158,7 +158,7 @@ Create the database:
 
 ```sql
 
-CREATE DATABASE user_auth_db;
+CREATE DATABASE login;
 
 ```
 
