@@ -38,11 +38,13 @@ public class PersistenceController {
     }
 
 
-    public void editUser(User user) {
+    public boolean editUser(User usu) {
         try {
-            userJpa.edit(user);
+            userJpa.edit(usu);
+            return true;
         } catch (Exception e) {
             System.out.println("Error while editing: The user does not exist or data is invalid.");
+            return false;
         }
     }
 
@@ -80,4 +82,5 @@ public class PersistenceController {
     public List<User> getUsers() {
         return userJpa.findAll();
     }
+
 }

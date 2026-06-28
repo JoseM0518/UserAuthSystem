@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class PrimaryUser extends JFrame{
     private JButton btnRefresh;
@@ -14,7 +15,7 @@ public class PrimaryUser extends JFrame{
     private JTextField txtUserName;
     private JTable tblUsers;
     private JPanel panel1;
-    Controller control;
+    private final Controller control;
     User usu;
 
     public PrimaryUser(Controller control, User usu) {
@@ -40,6 +41,13 @@ public class PrimaryUser extends JFrame{
                 PrimaryUser.this.dispose();
             }
         });
+        btnRefresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                loadTable();
+            }
+        });
     }
 
     private void loadTable() {
@@ -54,6 +62,17 @@ public class PrimaryUser extends JFrame{
         };
 
         model.setColumnIdentifiers(columns);
+
+        List<User> userList = control.fetchUsers();
+
+        if(userList != null){
+
+            for( User usr : userList){
+                Object[] obj = {usr.getId(), usr.getUserName(), usr.getRol().getRolName()};
+                model.addRow(obj);
+            }
+        }
+
         tblUsers.setModel(model);
     }
 

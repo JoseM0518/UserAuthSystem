@@ -16,19 +16,19 @@ public class InitialLogin extends JFrame{
     private JTextArea txtMessage;
     private JButton signUpButton;
 
-    Controller control;
+    private final Controller control;
     Registration regis;
 
 
 
-    public InitialLogin() {
+    public InitialLogin(Controller control) {
         setTitle("Control panel");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(panel1);
         pack();
         setLocationRelativeTo(null);
 
-        control = new Controller();
+        this.control = control;
 
         btnClear.addActionListener(new ActionListener() {
             @Override

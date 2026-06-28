@@ -10,7 +10,7 @@ public class Rol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String rolName;
     private String description;
     @OneToMany(mappedBy = "rol")
@@ -19,18 +19,18 @@ public class Rol implements Serializable {
     public Rol() {
     }
 
-    public Rol(Integer id, String rolName, String description, List<User> userList) {
+    public Rol(Long id, String rolName, String description, List<User> userList) {
         this.id = id;
         this.rolName = rolName;
         this.description = description;
         this.userList = userList;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
